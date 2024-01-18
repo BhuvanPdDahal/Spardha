@@ -3,10 +3,12 @@ import { User } from '@phosphor-icons/react';
 import React from 'react';
 import Card from './Card';
 import Board from './Board';
+import InfoBox from '../Info/InfoBox';
 
 const PlayBoard: React.FC = () => {
     return (
         <div className='min-h-screen flex flex-col justify-between gap-2 bg-dark p-4'>
+            <InfoBox />
             <div className='flex items-center justify-end gap-4'>
                 <ul className='flex gap-3'>
                     <Card />
