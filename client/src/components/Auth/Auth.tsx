@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import Logo from '../../images/logos/main-logo.png';
+import LoadingImg from '../../images/assets/loading.gif';
 import { State } from '../../interfaces/store';
 
 const Auth: React.FC = () => {
@@ -44,8 +45,14 @@ const Auth: React.FC = () => {
                     <label htmlFor="password">Password</label>
                     <input onChange={(e) => setPassword(e.target.value)} className='w-full border border-solid border-darkgrey rounded-md outline-none bg-lighterdark px-3 py-2' type="password" placeholder='Enter your password' id='password' value={password} />
                 </div>
-                <button className='w-full py-2 rounded-md font-medium bg-secondarydark transition-bg duration-300 hover:bg-secondary' type='submit'>{isLogin ? 'LOGIN' : 'SIGNUP'}</button>
-                <p className='text-center mt-3 mb-2'>{isLogin ? "Don't have an account?" : "Already have an account?"} <span onClick={handleClick} className='text-secondarydark cursor-pointer transition-color duration-300 hover:text-secondary'>{isLogin ? 'Sign up' : 'Log in'}</span></p>
+                <button className={`relative w-full py-2 rounded-md font-medium bg-secondarydark ${isLoading ? 'cursor-not-allowed' : 'hover:bg-secondary'}`} type="submit" disabled={isLoading}>
+                    <img className='absolute h-40px top-1/2 left-120px -translate-y-1/2' src={LoadingImg} alt="..." hidden={!isLoading} />
+                    {isLogin
+                        ? isLoading ? 'LOGGING IN...' : 'LOGIN'
+                        : isLoading ? 'SIGNING UP...' : 'SIGNUP'
+                    }
+                </button>
+                <p className='text-center mt-3 mb-2'>{isLogin ? "Don't have an account?" : "Already have an account?"} <span onClick={handleClick} className={`text-secondarydark cursor-pointer transition-color duration-300 ${isLoading ? 'pointer-events-none' : 'hover:text-secondary'}`}>{isLogin ? 'Sign up' : 'Log in'}</span></p>
             </form>
         </div>
     )

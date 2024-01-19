@@ -8,9 +8,13 @@ module.exports = {
             spacing: {
                 "1px": "1px",
                 "20px": "20px",
+                "30px": "30px",
+                "40px": "40px",
                 "50px": "50px",
+                "60px": "60px",
                 "70px": "70px",
                 "100px": "100px",
+                "120px": "120px",
                 "150px": "150px",
                 "200px": "250px",
             },
@@ -28,6 +32,9 @@ module.exports = {
                 "secondary": "#f5793b",
                 "secondarydark": "#d44d2f",
                 "dim": "rgba(255, 255, 255, 0.2)"
+            },
+            minHeight: {
+                "rem": "calc(100vh - 67px)",
             },
             lineHeight: {
                 "85px": "85px",

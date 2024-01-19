@@ -8,6 +8,7 @@ import {
 
 import AlertBox from './components/Alert/AlertBox';
 import Navbar from "./components/Navbar/Navbar";
+import Dashboard from './components/Dashboard/Dashboard';
 import About from "./components/About/About";
 import Auth from './components/Auth/Auth';
 import PlayBoard from "./components/PlayBoard/PlayBoard";
@@ -16,10 +17,11 @@ const App: React.FC = () => {
     return (
         <Router>
             <Fragment>
-                <AlertBox />
+                {/* <AlertBox /> */}
                 <Navbar />
                 <Routes>
                     <Route index element={<About />} />
+                    <Route path='/home' element={<Dashboard />} />
                     <Route path='/play' element={<PlayBoard />} />
                     <Route path='/login' element={<Auth />} />
                     <Route path='/signup' element={<Auth />} />
