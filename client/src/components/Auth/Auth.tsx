@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Logo from '../../images/logos/main-logo.png';
+import { State } from '../../interfaces/store';
 
 const Auth: React.FC = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLogin, setIsLogin] = useState(true);
+    const isLogin = location.pathname.includes('/login');
 
-    const toggleIsLogin = () => {
-        setIsLogin((prevIsLogin) => !prevIsLogin);
+    const handleClick = () => {
+        if(isLogin) {
+            navigate('/signup');
+        } else {
+            navigate('/login');
+        }
     };
+
+    const { isLoading } = useSelector((state: State) => state.auth);
 
     return (
         <div className='bg-dark min-h-screen flex items-center justify-center px-3 py-4'>
@@ -34,7 +45,7 @@ const Auth: React.FC = () => {
                     <input onChange={(e) => setPassword(e.target.value)} className='w-full border border-solid border-darkgrey rounded-md outline-none bg-lighterdark px-3 py-2' type="password" placeholder='Enter your password' id='password' value={password} />
                 </div>
                 <button className='w-full py-2 rounded-md font-medium bg-secondarydark transition-bg duration-300 hover:bg-secondary' type='submit'>{isLogin ? 'LOGIN' : 'SIGNUP'}</button>
-                <p className='text-center mt-3 mb-2'>{isLogin ? "Don't have an account?" : "Already have an account?"} <span onClick={toggleIsLogin} className='text-secondarydark cursor-pointer transition-color duration-300 hover:text-secondary'>{isLogin ? 'Sign up' : 'Log in'}</span></p>
+                <p className='text-center mt-3 mb-2'>{isLogin ? "Don't have an account?" : "Already have an account?"} <span onClick={handleClick} className='text-secondarydark cursor-pointer transition-color duration-300 hover:text-secondary'>{isLogin ? 'Sign up' : 'Log in'}</span></p>
             </form>
         </div>
     )

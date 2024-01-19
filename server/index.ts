@@ -3,10 +3,11 @@ import cors from 'cors';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { Socket, Server } from "socket.io";
+import { Server } from "socket.io";
 
 // LOCAL IMPORTS
 import './src/mongodb/connection';
+import socketHandler from './src/socket';
 import userRouter from './src/routes/user.routes';
 
 // VARIABLES
@@ -25,10 +26,8 @@ app.use(bodyParser.json({ limit: '30mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-// SOCKET CONNECTION
-io.on('connection', (socket: Socket) => {
-    console.log('a user connected');
-});
+// WEBSOCKET
+io.on('connection', socketHandler);
 
 // ROUTES
 app.use('/api/users', userRouter);
