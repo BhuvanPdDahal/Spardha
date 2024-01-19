@@ -14,7 +14,7 @@ const InfoBox: React.FC = () => {
                     <h2>{won ? 'CONGRATULATIONS!' : 'SORRY!'}</h2>
                     <p>You {won ? 'won' : 'lost'} the match</p>
                 </div>
-                <button className='w-full py-2 text-dark bg-secondary rounded-md hover:bg-darkgrey'>Okay</button>
+                <button className='w-full py-2 text-dark font-medium bg-secondary rounded-md hover:bg-darkgrey'>Okay</button>
             </div>
         </div>
     )
