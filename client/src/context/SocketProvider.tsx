@@ -13,7 +13,7 @@ export const useSocket = (): Socket | null => {
 };
 
 export const SocketProvider: React.FC<SocketProviderProps> = (props) => {
-    const socket = useMemo(() => io('localhost:8000'), []);
+    const socket = useMemo(() => io('http://localhost:5000'), []);
 
     return (
         <SocketContext.Provider value={socket}>

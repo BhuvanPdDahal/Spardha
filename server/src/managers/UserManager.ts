@@ -12,6 +12,8 @@ export default class UserManager {
         this.roomManager = new RoomManager();
     }
     addUser(socket: Socket, fullName: string, email: string) {
+        const userExists = this.users.find(({ socket: userSocket }) => userSocket.id === socket.id);
+        if(userExists) return;
         this.users.push({
             socket, fullName, email
         });
@@ -28,10 +30,14 @@ export default class UserManager {
         this.roomManager.createRoom(user1, user2);
         const pokerManager = new PokerManager();
         const cards = pokerManager.pickCardsForTwoPlayers(3);
+        console.log('cards: ', cards);
         user1.socket.emit('receive-cards', cards.player1Cards);
         user2.socket.emit('receive-cards', cards.player2Cards);
     }
     initHandlers(socket: Socket) {
         
+    }
+    getAllUsers() {
+        return this.users;
     }
 }

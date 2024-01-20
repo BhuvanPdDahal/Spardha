@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 
 import CardBackImg from '../../images/poker/card-back.png';
 import { values, suits } from '../../data/board';
+import { PokerCard } from '../../interfaces/playboard';
 
-const Card: React.FC = () => {
+const Card: React.FC<PokerCard> = ({ value, suit }: PokerCard) => {
     const [show, setShow] = useState(false);
-    const value = Math.floor(Math.random() * 13);
-    const suit = Math.floor(Math.random() * 4);
 
     const toggleShow = () => {
         setShow((prevShow) => !prevShow);

@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import { Server, Socket } from "socket.io";
 
 // LOCAL IMPORTS
-import './src/mongodb/connection';
+// import './src/mongodb/connection';
 import socketHandler from './src/socket';
 import userRouter from './src/routes/user.routes';
 import UserManager from './src/managers/UserManager';
@@ -14,7 +14,7 @@ import UserManager from './src/managers/UserManager';
 // VARIABLES
 const app = express();
 const port = process.env.PORT || 5000;
-const server = http.createServer(http);
+const server = http.createServer(app);
 const userManager = new UserManager();
 const io = new Server(server, {
     cors: {
@@ -30,6 +30,8 @@ app.use(cors());
 // WEBSOCKET
 io.on('connection', (socket: Socket) => {
     socketHandler(socket, userManager);
+    // console.log('a user connected: ', socket.id);
+    
 });
 
 // ROUTES

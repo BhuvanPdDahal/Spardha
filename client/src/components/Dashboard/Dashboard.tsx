@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { io } from 'socket.io-client';
 
 import CardsImg from '../../images/poker/cards.png';
 import LoadingImg from '../../images/assets/loading.gif';
@@ -12,16 +13,23 @@ const Dashboard: React.FC = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
+        console.log('play clicked');
+        
         socket?.emit('play-poker', {
             fullName: 'Bhuvan Dahal',
             email: 'bhuvandahal6@gmail.com'
         });
     };
 
+    const handlePlayPoker = () => {
+        navigate('/play');
+    };
+
     useEffect(() => {
-        socket?.on('play-poker', () => {
-            navigate('/play');
-        });
+        socket?.on('play-poker', handlePlayPoker);
+        return () => {
+            socket?.off('play-poker', handlePlayPoker);
+        };
     }, []);
 
     return (
