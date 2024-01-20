@@ -1,7 +1,7 @@
 import { Card } from "../interfaces/managers";
 import { allCards } from "../data/poker";
 
-export default class Poker {
+export default class PokerManager {
     private availableCards: Card[];
 
     constructor() {

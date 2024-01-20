@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import PokerBackImg from '../../images/poker/pocker-back.png';
+import CardBackImg from '../../images/poker/card-back.png';
 import { values, suits } from '../../data/board';
 
 const Card: React.FC = () => {
@@ -21,7 +21,7 @@ const Card: React.FC = () => {
                     <h5 className='text-dark w-full font-semibold font-serif px-1 rotate-180'>{values[value]}</h5>
                 </>
             ) : (
-                <img className='h-full w-full object-cover bg-secondarydark' src={PokerBackImg} alt="" />
+                <img className='h-full w-full object-cover bg-secondarydark' src={CardBackImg} alt="" />
             )}
         </div>
     )

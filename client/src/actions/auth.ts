@@ -14,9 +14,9 @@ import {
     signup_success,
     login_success
 } from '../constants/auth';
+import { showAlert } from './alert';
 import { success } from '../constants/alert';
 import { FormDataProp } from '../interfaces/auth';
-import { showAlert } from './alert';
 import handleError from '../functions/error';
 
 export const signup = (formData: FormDataProp, navigate: any) => async (dispatch: Dispatch<AuthAction | AlertAction>) => {
@@ -26,7 +26,7 @@ export const signup = (formData: FormDataProp, navigate: any) => async (dispatch
         dispatch({ type: SIGNUP, data });
         dispatch({ type: END_LOADING, for: AUTH });
         showAlert(signup_success, success, dispatch);
-        navigate('/');
+        navigate('/home');
         
     } catch (error) {
         dispatch({ type: END_LOADING, for: AUTH });
@@ -41,7 +41,7 @@ export const login = (formData: FormDataProp, navigate: any) => async (dispatch:
         dispatch({ type: LOGIN, data });
         dispatch({ type: END_LOADING, for: AUTH });
         showAlert(login_success, success, dispatch);
-        navigate('/');
+        navigate('/home');
 
     } catch (error) {
         dispatch({ type: END_LOADING, for: AUTH });

@@ -3,18 +3,19 @@ import cors from 'cors';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 
 // LOCAL IMPORTS
 import './src/mongodb/connection';
 import socketHandler from './src/socket';
 import userRouter from './src/routes/user.routes';
+import UserManager from './src/managers/UserManager';
 
 // VARIABLES
 const app = express();
 const port = process.env.PORT || 5000;
 const server = http.createServer(http);
-
+const userManager = new UserManager();
 const io = new Server(server, {
     cors: {
         origin: "*"
@@ -27,7 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // WEBSOCKET
-io.on('connection', socketHandler);
+io.on('connection', (socket: Socket) => {
+    socketHandler(socket, userManager);
+});
 
 // ROUTES
 app.use('/api/users', userRouter);

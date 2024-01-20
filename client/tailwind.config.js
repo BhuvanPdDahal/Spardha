@@ -16,7 +16,8 @@ module.exports = {
                 "100px": "100px",
                 "120px": "120px",
                 "150px": "150px",
-                "200px": "250px",
+                "200px": "200px",
+                "250px": "250px",
             },
             colors: {
                 "lightgrey": "#eee",
