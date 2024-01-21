@@ -5,3 +5,9 @@ import DiamondImg from '../images/poker/diamonds.png';
 
 export const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 export const suits = [ClubImg, HeartImg, SpadeImg, DiamondImg];
+
+export const initialCards = [
+    { value: -1, suit: -1 },
+    { value: -1, suit: -1 },
+    { value: -1, suit: -1 }
+];

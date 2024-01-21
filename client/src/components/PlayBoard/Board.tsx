@@ -6,6 +6,8 @@ import Logo from '../../images/logos/main-logo.png';
 import { BoardProp } from '../../interfaces/playboard';
 
 const Board: React.FC<BoardProp> = ({
+    remoteCards,
+    localPlayedCards,
     localPlayedCard,
     remotePlayedCard
 }: BoardProp) => {
@@ -19,6 +21,8 @@ const Board: React.FC<BoardProp> = ({
         <div className='bg-lightdark shadow-board h-250px w-full rounded-3xl p-4 max-w-3xl mx-auto'>
             {showTable && (
                 <Table
+                    remoteCards={remoteCards}
+                    localPlayedCards={localPlayedCards}
                     setShowTable={setShowTable}
                 />
             )}
@@ -32,6 +36,7 @@ const Board: React.FC<BoardProp> = ({
                         setLocalPlayedCard={null}
                         totalLocalCards={null}
                         setTotalLocalCards={null}
+                        setLocalPlayedCards={null}
                     />
                 )}
                 <img onClick={handleClick} className='h-100px' src={Logo} alt="" />
@@ -44,6 +49,7 @@ const Board: React.FC<BoardProp> = ({
                         setLocalPlayedCard={null}
                         totalLocalCards={null}
                         setTotalLocalCards={null}
+                        setLocalPlayedCards={null}
                     />
                 )}
             </div>

@@ -11,9 +11,10 @@ const Card: React.FC<CardProp> = ({
     suit,
     initialShow,
     localCard,
-    setLocalPlayedCard,
     totalLocalCards,
-    setTotalLocalCards
+    setLocalPlayedCard,
+    setTotalLocalCards,
+    setLocalPlayedCards
 }: CardProp) => {
     const socket = useSocket();
     const [show, setShow] = useState(initialShow);
@@ -36,6 +37,14 @@ const Card: React.FC<CardProp> = ({
         if(setLocalPlayedCard) {
             setLocalPlayedCard(card);
             setRemove(true);
+        }
+        if(setLocalPlayedCards) {
+            console.log('hello world');
+            
+            setLocalPlayedCards((prevCards) => {
+                prevCards[2 - totalCards] = card;
+                return prevCards;
+            });
         }
     };
 

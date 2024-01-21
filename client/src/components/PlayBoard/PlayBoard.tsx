@@ -4,13 +4,22 @@ import { User } from '@phosphor-icons/react';
 import Card from './Card';
 import Board from './Board';
 import InfoBox from '../Info/InfoBox';
+import { initialCards } from '../../data/board';
 import { useSocket } from '../../context/SocketProvider';
 import { PokerCard, HandleReceiveCardPara } from '../../interfaces/playboard';
 
 const PlayBoard: React.FC = () => {
+    const initialLocalCards = [
+        { value: 10, suit: 2 },
+        { value: 10, suit: 2 },
+        { value: 10, suit: 2 }
+    ];
     const socket = useSocket();
-    const [localCards, setLocalCards] = useState<PokerCard[]>([]);
-    const [remoteCards, setRemoteCards] = useState<PokerCard[]>([]);
+    const [localCards, setLocalCards] = useState<PokerCard[]>(initialLocalCards);
+    const [localPlayedCards, setLocalPlayedCards] = useState<PokerCard[]>(initialCards);
+    console.log('initialLocalPlayedCards: ', localPlayedCards);
+    
+    const [remoteCards, setRemoteCards] = useState<PokerCard[]>(initialCards);
     const [localPlayedCard, setLocalPlayedCard] = useState<PokerCard | null>(null);
     const [remotePlayedCard, setRemotePlayedCard] = useState<PokerCard | null>(null);
     const [totalLocalCards, setTotalLocalCards] = useState(3);
@@ -32,6 +41,10 @@ const PlayBoard: React.FC = () => {
             console.log('passed');
             setRemotePlayedCard(card);
             setTotalRemoteCards(totalCards);
+            setRemoteCards((prevCards) => {
+                prevCards[2 - totalCards] = card;
+                return prevCards;
+            });
         }
     };
 
@@ -65,6 +78,7 @@ const PlayBoard: React.FC = () => {
                             setLocalPlayedCard={null}
                             totalLocalCards={null}
                             setTotalLocalCards={null}
+                            setLocalPlayedCards={null}
                         />
                     ))}
                 </ul>
@@ -73,6 +87,8 @@ const PlayBoard: React.FC = () => {
                 </div>
             </div>
             <Board
+                remoteCards={remoteCards}
+                localPlayedCards={localPlayedCards}
                 localPlayedCard={localPlayedCard}
                 remotePlayedCard={remotePlayedCard}
             />
@@ -81,7 +97,7 @@ const PlayBoard: React.FC = () => {
                     <User size={50} weight='fill' color='lightgrey' />
                 </div>
                 <ul className='flex items-center gap-3'>
-                    {[...Array(3)].map((_, index) => (
+                    {/* {[...Array(3)].map((_, index) => (
                         <Card
                             key={index}
                             value={1}
@@ -92,8 +108,8 @@ const PlayBoard: React.FC = () => {
                             totalLocalCards={totalLocalCards}
                             setTotalLocalCards={setTotalLocalCards}
                         />
-                    ))}
-                    {/* {localCards.map((card, index) => (
+                    ))} */}
+                    {localCards.map((card, index) => (
                         <Card
                             key={index}
                             value={card.value}
@@ -103,8 +119,9 @@ const PlayBoard: React.FC = () => {
                             setLocalPlayedCard={setLocalPlayedCard}
                             totalLocalCards={totalLocalCards}
                             setTotalLocalCards={setTotalLocalCards}
+                            setLocalPlayedCards={setLocalPlayedCards}
                         />
-                    ))} */}
+                    ))}
                 </ul>
             </div>
         </div>
