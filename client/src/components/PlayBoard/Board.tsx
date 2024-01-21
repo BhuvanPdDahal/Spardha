@@ -1,12 +1,51 @@
-import React from 'react';
+import React, { useState} from 'react';
 
+import Card from './Card';
+import Table from './Table';
 import Logo from '../../images/logos/main-logo.png';
+import { BoardProp } from '../../interfaces/playboard';
 
-const Board: React.FC = () => {
+const Board: React.FC<BoardProp> = ({
+    localPlayedCard,
+    remotePlayedCard
+}: BoardProp) => {
+    const [showTable, setShowTable] = useState(false);
+
+    const handleClick = () => {
+        setShowTable(true);
+    };
+
     return (
         <div className='bg-lightdark shadow-board h-250px w-full rounded-3xl p-4 max-w-3xl mx-auto'>
-            <div className='h-full flex items-center justify-center rounded-2xl bg-lightdark'>
-                <img className='h-100px' src={Logo} alt="" />
+            {showTable && (
+                <Table
+                    setShowTable={setShowTable}
+                />
+            )}
+            <div className='h-full flex items-center justify-center gap-5 rounded-2xl bg-lightdark'>
+                {localPlayedCard && (
+                    <Card
+                        value={localPlayedCard.value}
+                        suit={localPlayedCard.suit}
+                        initialShow={true}
+                        localCard={false}
+                        setLocalPlayedCard={null}
+                        totalLocalCards={null}
+                        setTotalLocalCards={null}
+                    />
+                )}
+                <img onClick={handleClick} className='h-100px' src={Logo} alt="" />
+                {remotePlayedCard && (
+                    <Card
+                        value={remotePlayedCard.value}
+                        suit={remotePlayedCard.suit}
+                        initialShow={true}
+                        localCard={false}
+                        setLocalPlayedCard={null}
+                        totalLocalCards={null}
+                        setTotalLocalCards={null}
+                    />
+                )}
             </div>
         </div>
     )

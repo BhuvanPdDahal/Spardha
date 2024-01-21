@@ -17,7 +17,6 @@ export default class UserManager {
         this.users.push({
             socket, fullName, email
         });
-        this.initHandlers(socket);
         this.matchUsers();
     }
     matchUsers() {
@@ -33,9 +32,15 @@ export default class UserManager {
         console.log('cards: ', cards);
         user1.socket.emit('receive-cards', cards.player1Cards);
         user2.socket.emit('receive-cards', cards.player2Cards);
+        this.initHandlers(user1.socket, user2.socket);
+        this.initHandlers(user2.socket, user1.socket);
     }
-    initHandlers(socket: Socket) {
-        
+    initHandlers(socket1: Socket, socket2: Socket) {
+        socket1.on('send-card', (data) => {
+            console.log('inside send-card');
+            
+            socket2.emit('receive-card', data);
+        });
     }
     getAllUsers() {
         return this.users;

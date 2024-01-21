@@ -48,6 +48,10 @@ module.exports = {
                 "bg": "background-color",
                 "bordercolor": "border, color",
                 "color": "color",
+            },
+            gridTemplateColumns: {
+                // "table": '200px minmax(900px, 1fr) 100px',
+                "table": "1fr 4fr 4fr 3fr",
             }
         },
     },
